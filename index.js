@@ -15,12 +15,15 @@ const SERVER_PORT = process.env.PORT || 3000;
 
 clients = []
 
+var connections = 0
+
 io.on('connection', socket => {
 
     var localUsername = 'Unknown'
 
     socket.emit('welcome', 'Welcome to the chat !')
     io.emit('newUser', 'A user has entered the chat')
+    connections++
     
     socket.on('message', (data) => {
         try {
@@ -37,8 +40,16 @@ io.on('connection', socket => {
     
     socket.on('disconnect', () => {
         io.emit('userLeft', {username: localUsername})
+        try {
+            clients.pop(localUsername)
+        } catch {}
+        connections--
     })
 })
+
+setInterval(() => {
+    io.emit('usersNumber', connections)
+}, 1500)
 
 http.listen(SERVER_PORT, () => {
     console.log(`Socket Server on Port: ${SERVER_PORT}`)
