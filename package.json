@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,7 +14,4 @@
     "socket.io": "^4.3.0",
     "socketio": "^1.0.0"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.13"
-  }
 }
