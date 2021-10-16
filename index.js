@@ -19,7 +19,7 @@ var connections = 0
 
 io.on('connection', socket => {
 
-    var localUsername = 'Unknown'
+    var localUsername = 'Unknown User'
 
     socket.emit('welcome', 'Welcome to the chat !')
     io.emit('newUser', 'A user has entered the chat')
@@ -31,7 +31,7 @@ io.on('connection', socket => {
             localUsername = username
 
             if (!clients.includes(username)) clients.push(username)
-            let message = data.message
+            let message = data.message.toString().trim()
             io.emit('message', {username, message})
         } catch (error) {
             console.log('An error occured upon message receival : ' + error)
