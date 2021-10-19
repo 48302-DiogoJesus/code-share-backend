@@ -55,9 +55,8 @@ io.on('connection', socket => {
             if (!clients.includes(localUsername)) clients.push(localUsername)
 
             let message = data.message.toString()
-
             // Broadcast message to all clients
-            io.emit('message', {localUsername, message})
+            io.emit('message', {'username' : localUsername, message})
         } catch (error) {
             /**
              * In case an error occurs
